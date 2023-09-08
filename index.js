@@ -2,20 +2,18 @@ const express = require('express');
 const path = require('path');
 require('dotenv').config()
 
-const app = express();0
-app.use(express.json({ extended: false }));
+const productsApiRouter = require("./routes/productsApiRoutes")
 
-// app.get("/", (req, res) => {
-//   res.json({
-//     msg: "Estás en la home del backend"
-//   })
-// })
+const app = express();
+app.use(express.json({ extended: false }));
 
 app.get("/test", (req, res) => {
   res.json({
     msg: "El Backend funciona perfectamente!"
   })
 })
+
+app.use("/api/products", productsApiRouter)
 
 //* Serve static assets in production, must be at this location of this file
 if (process.env.NODE_ENV === 'production') {
